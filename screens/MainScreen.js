@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { Ionicons } from '@expo/vector-icons';
@@ -51,16 +52,24 @@ LocaleConfig.defaultLocale = 'ko';
 export default function MainScreen() {
   const today = new Date().toISOString().split('T')[0];
   const [selectedDate, setSelectedDate] = useState(today); //오늘 날짜로 초기 설정
+  const [studyGroups, setStudyGroups] = useState([]); //스터디 목록 가져옴
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchStudyGroups = async () => {
+      try {
+        const response = await axios.get('http://192.168.219.115:5000/api/studies'); // IP 주소를 수정해야 함
+        setStudyGroups(response.data);
+      } catch (error) {
+        console.error('스터디 목록을 불러오는 데 실패했습니다.', error.message);
+      }
+    };
+    fetchStudyGroups();
+  }, []);
+
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
   };
-
-  const navigation = useNavigation();
-
-  const handleChatPress = () => {
-    navigation.navigate('채팅');
-  };
-
 
 
   
@@ -105,10 +114,6 @@ export default function MainScreen() {
         <Text style={styles.emptyText}>가입중인 스터디가 없습니다</Text>
       </View>
 
-      {/* 플로팅 버튼 */}
-      <TouchableOpacity style={styles.fab} onPress={handleChatPress}>
-        <Ionicons name="chatbubbles-outline" size={28} color="white" />
-      </TouchableOpacity>
     </View>
   );
 }
@@ -162,16 +167,6 @@ const styles = StyleSheet.create({
   emptyText: {
     color: '#aaa',
   },
-  fab: {
-    position: 'absolute',
-    right: 20,
-    bottom: 25,
-    backgroundColor: '#00aaff',
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-  },
+
 });
+
