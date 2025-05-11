@@ -73,14 +73,14 @@ const ProfileScreen = () => {
             <View style={styles.profileHeader}>
               <Image source={{ uri:  'https://via.placeholder.com/100' }} style={styles.profileImage} />
               <View>
-                <Text style={styles.userName}>{profileData.username}</Text>
-                <Text style={styles.userInfo}>{profileData.major} {profileData.grade} 학년 </Text>
+                <Text style={styles.userName}>user_name</Text>
+                <Text style={styles.userInfo}>정보융합대학 4학년 </Text>
               </View>
             </View>
 
             <Text style={styles.sectionTitle}>소개글</Text>
             <Text style={styles.introText}>
-               {profileData.bio ? profileData.bio : '소개글이 없습니다.'}
+              소개글이 없습니다.
             </Text>
 
             <Text style={styles.sectionTitle}>지난달 스터디 출석률</Text>
