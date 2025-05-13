@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet,KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import RNPickerSelect from 'react-native-picker-select';
+import { Ionicons } from '@expo/vector-icons';
 
 const ProfileEditScreen = () => {
   const [gender, setGender] = useState('남');
@@ -14,6 +16,20 @@ const ProfileEditScreen = () => {
     성별: false,
     소개글: false,
   });
+
+  const departments = [
+    { label: '경영대학', value: '경영대학' },
+    { label: '인문사회과학대학', value: '인문사회과학대학' },
+    { label: '수산과학대학', value: '수산과학대학' },
+    { label: '공학대학', value: '공학대학' },
+    { label: '글로벌자유전공학부', value: '글로벌자유전공학부' },
+    { label: '정보융합대학', value: '정보융합대학' },
+    { label: '자유전공학부', value: '자유전공학부' },
+    { label: '자연과학대학', value: '자연과학대학' },
+    { label: '환경해양대학', value: '환경해양대학' },
+    { label: '학부대학', value: '학부대학' },
+    { label: '미래융합학부', value: '미래융합학부' },
+  ];
 
   const handleSave = () => {
     Alert.alert('저장 완료', '로컬에서 테스트가 완료되었습니다.');
@@ -68,8 +84,38 @@ const ProfileEditScreen = () => {
           </TouchableOpacity>
         </View>
 
+         <Text style={styles.label}>학과</Text>
+         <View style={styles.dropdownContainer}>
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedDepartment(value)}
+          items={departments}
+          placeholder={{ label: "학과를 선택하세요", value: null }}
+          style={pickerSelectStyles}
+          useNativeAndroidPickerStyle={false} 
+        />
+        <Ionicons
+            name="chevron-down"
+            size={20}
+            color="gray"
+            style={styles.dropdownIcon}
+          />
+        </View>
+
         <Text style={styles.label}>학년</Text>
-        <View style={styles.buttonGroup}>
+        
+          <View style={styles.gradeGroup}>
+            {[1, 2, 3, 4, 5].map((num) => (
+              <TouchableOpacity
+                key={num}
+                style={[styles.gradeButton, grade === num && styles.selectedButton]}
+                onPress={() => setGrade(num)}
+              >
+                <Text style={[styles.buttonText, grade === num && styles.selectedText]}>{num}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <View style={styles.buttonGroup}>
           <TouchableOpacity
             style={[styles.toggleButton, status === '재학' && styles.selectedButton]}
             onPress={() => setStatus('재학')}
@@ -84,18 +130,6 @@ const ProfileEditScreen = () => {
           </TouchableOpacity>
         </View>
 
-          <Text style={styles.label}>학년</Text>
-          <View style={styles.gradeGroup}>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <TouchableOpacity
-                key={num}
-                style={[styles.gradeButton, grade === num && styles.selectedButton]}
-                onPress={() => setGrade(num)}
-              >
-                <Text style={[styles.buttonText, grade === num && styles.selectedText]}>{num}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
           
           <Text style={styles.label}>소개글</Text>
           <TextInput
@@ -118,6 +152,7 @@ const ProfileEditScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    
   },
   keyboardContainer: {
     flex: 1,
@@ -131,7 +166,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 10,
+    borderRadius: 15,
     paddingVertical: 12,
     paddingHorizontal: 15,
     backgroundColor: '#f9f9f9',
@@ -143,6 +178,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   buttonGroup: {
+     borderWidth: 1,
+     borderColor: '#ccc',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 15,
@@ -171,11 +208,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   gradeButton: {
+    borderWidth: 1,
+    borderColor: '#ccc',
     flex: 1,
     padding: 10,
     margin: 2,
     backgroundColor: '#f2f2f2',
-    borderRadius: 8,
+    borderRadius: 20,
     alignItems: 'center',
   },
   textArea: {
@@ -222,7 +261,47 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 16,
   },
+   dropdownContainer: {
+    position: 'relative',
+    justifyContent: 'center',
+  },
+  dropdownIcon: {
+    position: 'absolute',
+    right: 13,
+    top: 18,
+    zIndex: 1,
+  },
 });
+
+const pickerSelectStyles = {
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#777',
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    color: 'black',
+    paddingRight: 30,
+    marginTop: 5,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    height: 50,
+    borderWidth: 0.5,
+    borderColor: '#777',
+    backgroundColor: '#ffffff',
+    borderRadius: 15,
+    color: 'black',
+    paddingRight: 30,
+    marginTop: 5,
+  },
+};
+
 
 export default ProfileEditScreen;
 ""
