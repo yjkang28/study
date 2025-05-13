@@ -77,7 +77,9 @@ export default function MainScreen() {
     <View style={styles.container}>
       {/* 상단 유저 영역 */}
       <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('알림')}>
         <Ionicons name="notifications" size={20} color="white" />
+        </TouchableOpacity> 
         {/* profile screen으로 넘어가게함 */}
         <TouchableOpacity onPress={() => navigation.navigate('내 프로필')}>
         <Text style={styles.username}>user_name</Text>

@@ -3,14 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import MainScreen from './screens/MainScreen';
 import ChatScreen from './screens/ChatScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import { Ionicons } from '@expo/vector-icons';
-import SetProfile from './screens/SetProfile';
+import ProfileEditScreen from './screens/ProfileEditScreen';
 import SettingScreen from './screens/SettingScreen';
 import SearchScreen from './screens/SearchScreen';
 import SearchCategories from './screens/SearchCategories';
+import NotificationScreen from './screens/NotificationScreen';
 
 
 
@@ -69,11 +70,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false}} />
-        
+        <Stack.Screen name="알림" component={NotificationScreen}  options={{ headerShown: false }}/>
         <Stack.Screen name="카테고리 검색" component={SearchCategories}  options={{ headerShown: false }}/>
         <Stack.Screen name="채팅" component={ChatScreen} options={{ headerShown: false }} />
         <Stack.Screen name="내 프로필" component={ProfileScreen}  options={{ headerShown: false }}/>
-        <Stack.Screen name="프로필 관리" component={SetProfile}  options={{ headerShown: false }}/>
+        <Stack.Screen name="프로필 관리" component={ProfileEditScreen}  
+        options={{headerStyle: { backgroundColor: '#1A2D3D',},
+        headerTitleStyle: {fontweight:'bold',color :'#FFFFFF'},
+        headerTintColor: '#FFFFFF',
+        }}/>
         <Stack.Screen name="설정" component={SettingScreen}  options={{ headerShown: false }}/>
 
       </Stack.Navigator>
