@@ -15,13 +15,15 @@ const SearchScreen = () => {
     const navigation = useNavigation();
 
   const renderItem = ({ item }) => (
-    <View style={styles.studyCard}>
+     <TouchableOpacity onPress={() => navigation.navigate('스터디 소개글', { study: item })}>
+      <View style={styles.studyCard}>
       <Text style={styles.studyTitle}>{item.title}</Text>
       <View style={styles.studyInfo}>
         <Text style={styles.studyLeader}>{item.leader}</Text>
         <Text style={styles.studyMemberCount}>인원수 {item.members}</Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -35,6 +37,7 @@ const SearchScreen = () => {
         </View>
       </TouchableOpacity>
       {/* 목록 */}
+      
       <FlatList
         data={studyData}
         keyExtractor={(item) => item.id}
@@ -58,8 +61,10 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     flexDirection: 'row',
-    backgroundColor: '#F5F5F5',
-    marginTop: 16,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginTop: 11,
     marginLeft: 16,
     marginRight: 16,
     marginBottom: 10,

@@ -14,6 +14,8 @@ import SetProfile from './screens/SetProfile';
 import SettingScreen from './screens/SettingScreen';
 import SearchScreen from './screens/SearchScreen';
 import SearchCategories from './screens/SearchCategories';
+import SearchResultScreen from './screens/SearchResultScreen';
+import StudyIntroScreen from './screens/StudyIntroScreen';
 import NotificationScreen from './screens/NotificationScreen';
 import LoginScreen from './screens/LoginScreen';
 import StudyDetailScreen from './screens/StudyDetailScreen';
@@ -91,12 +93,14 @@ function Root({  navigationRef, currentRouteName }) {
         <Stack.Screen name="비밀번호 찾기" component={ForgotPasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="검색" component={SearchScreen} options={{ headerShown: false }} />
         <Stack.Screen name="카테고리 검색" component={SearchCategories} options={{ headerShown: false }} />
-         <Stack.Screen name="채팅목록" component={ChatListScreen} options={{
+        <Stack.Screen name="검색 결과" component={SearchResultScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="스터디 소개글" component={StudyIntroScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="채팅목록" component={ChatListScreen} options={{
           headerStyle: { backgroundColor: '#001f3f' },
           headerTitleStyle: { fontWeight: 'bold', color: '#FFFFFF' },
           headerTintColor: '#FFFFFF',
         }} />
-         <Stack.Screen name="채팅화면" component={ChatScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="채팅화면" component={ChatScreen} options={{ headerShown: false }} />
         <Stack.Screen name="내 프로필" component={ProfileScreen} options={{ headerShown: false }} />
         <Stack.Screen name="프로필 관리" component={SetProfile} options={{ headerShown: false }} />
         <Stack.Screen name="설정" component={SettingScreen} options={{ headerShown: false }} />
@@ -107,7 +111,7 @@ function Root({  navigationRef, currentRouteName }) {
       {/* ✅ 모든 화면에서 항상 보이는 플로팅 버튼 */}
       { currentRouteName !== 'Login' && currentRouteName !== '채팅화면' && 
       currentRouteName !== '채팅목록' && currentRouteName !== '회원가입' &&
-      currentRouteName !== '비밀번호 찾기' &&
+      currentRouteName !== '비밀번호 찾기' &&currentRouteName !== '스터디 소개글' &&
       currentRouteName !== '프로필 관리' &&  currentRouteName !== '카테고리 검색' &&(
       <TouchableOpacity
         style={styles.fab}
