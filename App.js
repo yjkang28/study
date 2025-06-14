@@ -21,6 +21,10 @@ import LoginScreen from './screens/LoginScreen';
 import StudyDetailScreen from './screens/StudyDetailScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
+import SetTimeTableScreen from './screens/SetTimeTableScreen';
+import OpenStudyScreen from './screens/OpenStudyScreen';
+import CategorySelectScreen from './screens/CategorySelectScreen';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -91,7 +95,14 @@ function Root({  navigationRef, currentRouteName }) {
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
         <Stack.Screen name="회원가입" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="비밀번호 찾기" component={ForgotPasswordScreen} options={{ headerShown: false }} />
+         <Stack.Screen name="시간표 만들기" component={SetTimeTableScreen} options={{ headerShown: false }} />
         <Stack.Screen name="검색" component={SearchScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="스터디 개설" component={OpenStudyScreen} options={{
+          headerStyle: { backgroundColor: '#002B5B' },
+          headerTitleStyle: { fontWeight: 'bold', color: '#FFFFFF' },
+          headerTintColor: '#FFFFFF',
+        }} />
+        <Stack.Screen name="분야 선택" component={CategorySelectScreen} options={{ headerShown: false }} />
         <Stack.Screen name="카테고리 검색" component={SearchCategories} options={{ headerShown: false }} />
         <Stack.Screen name="검색 결과" component={SearchResultScreen} options={{ headerShown: false }} />
         <Stack.Screen name="스터디 소개글" component={StudyIntroScreen} options={{ headerShown: false }} />
@@ -112,7 +123,9 @@ function Root({  navigationRef, currentRouteName }) {
       { currentRouteName !== 'Login' && currentRouteName !== '채팅화면' && 
       currentRouteName !== '채팅목록' && currentRouteName !== '회원가입' &&
       currentRouteName !== '비밀번호 찾기' &&currentRouteName !== '스터디 소개글' &&
-      currentRouteName !== '프로필 관리' &&  currentRouteName !== '카테고리 검색' &&(
+      currentRouteName !== '프로필 관리' &&  currentRouteName !== '검색' &&  
+      currentRouteName !== '시간표 만들기' && currentRouteName !== '카테고리 검색' &&
+      currentRouteName !== '분야 선택' && currentRouteName !== '스터디 개설' &&(
       <TouchableOpacity
         style={styles.fab}
         onPress={() => navigationRef.current?.navigate('채팅목록')}

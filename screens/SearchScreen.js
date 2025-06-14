@@ -45,6 +45,12 @@ const SearchScreen = () => {
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         contentContainerStyle={styles.listContainer}
       />
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => navigation.navigate('스터디 개설')}
+        >
+        <Ionicons name="add-outline" size={28} color="white" />
+      </TouchableOpacity>
     </View>
     
   );
@@ -107,5 +113,19 @@ const styles = StyleSheet.create({
   separator: {
     height: 1,
     backgroundColor: '#E0E0E0',
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#00aaff',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    zIndex: 10,
+
   },
 });
