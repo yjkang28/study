@@ -133,6 +133,10 @@ const SetTimeTableScreen = () => {
         <Ionicons name="add-circle-outline" size={20} color="black" />
         <Text style={styles.addButtonText}>과목 추가하기</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.saveButton} onPress={() => console.log(subjects)}>
+        <Text style={styles.saveButtonText}>저장</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -206,17 +210,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
     marginTop: 20,
     borderWidth: 1,
-    borderColor: '#999',
+    borderColor: '#ccc',
     borderRadius: 20,
-    paddingVertical:10,
+    paddingVertical:8,
     paddingHorizontal: 10,
   },
   addButtonText: {
     marginLeft: 6,
     fontWeight: 'bold',
   },
+  saveButton: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: 20,
+  backgroundColor: '#007AFF',
+  borderRadius: 20,
+  paddingVertical: 10,
+  paddingHorizontal: 20,
+},
+
+saveButtonText: {
+  color: 'white',
+  fontWeight: 'bold',
+  marginLeft: 6,
+  paddingVertical: 4,
+},
 });
 
 export default SetTimeTableScreen;

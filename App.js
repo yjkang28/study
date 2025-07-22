@@ -24,6 +24,9 @@ import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import SetTimeTableScreen from './screens/SetTimeTableScreen';
 import OpenStudyScreen from './screens/OpenStudyScreen';
 import CategorySelectScreen from './screens/CategorySelectScreen';
+import AttendanceScreen from './screens/AttendanceScreen';
+import RankingScreen from './screens/RankingScreen';
+import ReviewScreen from './screens/ReviewScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -38,11 +41,17 @@ function Tabs({ navigation }) {
       initialRouteName="홈"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          let iconName = route.name === '홈' ? 'home' : route.name === '검색' ? 'search' : 'location-outline';
+         let iconName = route.name === '홈' ? 'home' :route.name === '출석' ? 'calendar-clear-outline' : route.name === '검색' ? 'search' : 'location-outline';
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
     >
+      <Tab.Screen name="출석" 
+      component={AttendanceScreen}  
+      options={{ headerShown: false }}
+      listeners={({ navigation }) => ({
+        tabPress: () => setCurrentRoute('출석률')
+      })} />
       <Tab.Screen name="검색" 
       component={SearchScreen}  
       options={{ headerShown: false }}
@@ -95,7 +104,9 @@ function Root({  navigationRef, currentRouteName }) {
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
         <Stack.Screen name="회원가입" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="비밀번호 찾기" component={ForgotPasswordScreen} options={{ headerShown: false }} />
-         <Stack.Screen name="시간표 만들기" component={SetTimeTableScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="출석률" component={AttendanceScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="출석률 랭킹" component={RankingScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="시간표 만들기" component={SetTimeTableScreen} options={{ headerShown: false }} />
         <Stack.Screen name="검색" component={SearchScreen} options={{ headerShown: false }} />
         <Stack.Screen name="스터디 개설" component={OpenStudyScreen} options={{
           headerStyle: { backgroundColor: '#002B5B' },
@@ -106,6 +117,7 @@ function Root({  navigationRef, currentRouteName }) {
         <Stack.Screen name="카테고리 검색" component={SearchCategories} options={{ headerShown: false }} />
         <Stack.Screen name="검색 결과" component={SearchResultScreen} options={{ headerShown: false }} />
         <Stack.Screen name="스터디 소개글" component={StudyIntroScreen} options={{ headerShown: false }} />
+         <Stack.Screen name="리뷰" component={ReviewScreen} options={{ headerShown: false }} />
         <Stack.Screen name="채팅목록" component={ChatListScreen} options={{
           headerStyle: { backgroundColor: '#001f3f' },
           headerTitleStyle: { fontWeight: 'bold', color: '#FFFFFF' },
@@ -125,7 +137,8 @@ function Root({  navigationRef, currentRouteName }) {
       currentRouteName !== '비밀번호 찾기' &&currentRouteName !== '스터디 소개글' &&
       currentRouteName !== '프로필 관리' &&  currentRouteName !== '검색' &&  
       currentRouteName !== '시간표 만들기' && currentRouteName !== '카테고리 검색' &&
-      currentRouteName !== '분야 선택' && currentRouteName !== '스터디 개설' &&(
+      currentRouteName !== '분야 선택' && currentRouteName !== '스터디 소개글' &&
+      currentRouteName !== '스터디 개설' &&(
       <TouchableOpacity
         style={styles.fab}
         onPress={() => navigationRef.current?.navigate('채팅목록')}

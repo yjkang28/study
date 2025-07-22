@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,7 +13,33 @@ const MainScreen = () => {
   const navigation = useNavigation();
   const [selectedSchedule, setSelectedSchedule] = useState(null);
 
-    const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const days = ['월', '화', '수', '목', '금', '토', '일'];
+
+  const [weekRange, setWeekRange] = useState('');
+
+  useEffect(() => {
+    const today = new Date();
+
+    // getDay()는 0(일) ~ 6(토) -> 월요일이 1, 일요일이 0
+    const day = today.getDay();
+    const mondayOffset = day === 0 ? -6 : 1 - day;
+    const sundayOffset = day === 0 ? 0 : 7 - day;
+
+    const monday = new Date(today);
+    monday.setDate(today.getDate() + mondayOffset);
+
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() + sundayOffset);
+
+    const format = (date) => {
+       const yyyy = date.getFullYear();
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const dd = String(date.getDate()).padStart(2, '0');
+      return `${mm}/${dd}`;
+    };
+
+    setWeekRange(`${format(monday)} ~ ${format(sunday)}`);
+  }, []);
 
   const renderSchedule = (day, hour) => {
     const schedule = mockSchedule.find(
@@ -55,7 +81,7 @@ const MainScreen = () => {
         
         <View style={styles.mySchedule}>
            <View style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={styles.myScheduleText}>25/6/9 ~ 6/15</Text>
+                <Text style={styles.myScheduleText}>{weekRange}</Text>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('시간표 만들기')}>
                 <Ionicons name="pencil-outline" size={24} color="black" />

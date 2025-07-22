@@ -2,8 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const StudyIntroScreen = () => {
+
+  const navigation = useNavigation();
+
+  const rating = 3; // 1~5
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -42,6 +48,26 @@ const StudyIntroScreen = () => {
           <View style={styles.infoBox}>
             <Text style={styles.infoText}>인원 : 00 / 00</Text>
             <Text style={styles.infoText}>스터디 개설일 : 20##/##/##</Text>
+            <Text style={styles.infoText}>이 스터디의 이번달 출석 랭킹 : <Text style={styles.rankHighlight}>34위</Text></Text>
+            
+            <TouchableOpacity
+                style={styles.ratingTouchable}
+                onPress={() => navigation.navigate('리뷰')}
+              >
+                <Text style={styles.ratingLabel}>스터디 평점</Text>
+                <View style={styles.starRow}>
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Ionicons
+                      key={i}
+                      name={i <= rating ? 'star' : 'star-outline'}
+                      size={16}
+                      color={i <= rating ? '#f5a623' : '#ccc'}
+                      style={styles.starIcon}
+                    />
+                  ))}
+                  <Ionicons name="chevron-forward" size={16} color="#888" style={styles.arrowIcon} />
+                </View>
+              </TouchableOpacity>
           </View>
 
           {/* 댓글 */}
@@ -142,6 +168,31 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: 600,
   },
+    ratingTouchable: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginTop: 4,
+},
+
+ratingLabel: {
+  fontSize: 14,
+  fontWeight: '600',
+  marginRight: 8,
+  color: '#333',
+},
+
+starRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
+
+starIcon: {
+  marginRight: 2,
+},
+
+arrowIcon: {
+  marginLeft: 4,
+},
   commentsSection: {
     marginTop: 24,
   },
