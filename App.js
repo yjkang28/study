@@ -27,7 +27,8 @@ import CategorySelectScreen from './screens/CategorySelectScreen';
 import AttendanceScreen from './screens/AttendanceScreen';
 import RankingScreen from './screens/RankingScreen';
 import ReviewScreen from './screens/ReviewScreen';
-
+import CheckAttendanceScreen from './screens/CheckAttendanceScreen';
+import AttendanceListScreen from './screens/AttendanceListScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -105,6 +106,9 @@ function Root({  navigationRef, currentRouteName }) {
         <Stack.Screen name="회원가입" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="비밀번호 찾기" component={ForgotPasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="출석률" component={AttendanceScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="출석리스트" component={AttendanceListScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="출석체크" component={CheckAttendanceScreen} options={{ headerShown: false }} />
+        
         <Stack.Screen name="출석률 랭킹" component={RankingScreen} options={{ headerShown: false }} />
         <Stack.Screen name="시간표 만들기" component={SetTimeTableScreen} options={{ headerShown: false }} />
         <Stack.Screen name="검색" component={SearchScreen} options={{ headerShown: false }} />
