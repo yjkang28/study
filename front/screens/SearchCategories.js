@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.card,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
+    paddingTop: 35,
   },
   backButton: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700', color: COLORS.text },
@@ -218,7 +219,8 @@ const styles = StyleSheet.create({
   selectedChipText: { color: '#fff', fontWeight: '600' },
 
   bottomContainer: {
-    padding: 20,
+    paddingVertical: 11,
+    paddingHorizontal: 20,
     backgroundColor: COLORS.card,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,

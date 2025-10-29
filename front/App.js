@@ -64,6 +64,7 @@ function SearchStack() {
       <SearchStackNav.Screen
         name="SearchScreen"
         component={SearchScreen}
+        options={{ headerShown: true, title: '검색 결과' }} 
       />
     </SearchStackNav.Navigator>
   );
@@ -100,7 +101,7 @@ function Tabs() {
       <Tab.Screen
         name="검색"
         component={SearchStack}
-        options={{ tabBarLabel: '검색' }}   // ← 라벨 명시해서 항상 보이게
+        options={{ tabBarLabel: '검색'}}   // ← 라벨 명시해서 항상 보이게
       />
 
       <Tab.Screen

@@ -360,19 +360,14 @@ export default function MainScreen() {
           ))}
         </View>
 
-        {/* 이번 주 스터디 일정 (오늘 일정만 표시) */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Ionicons name="calendar" size={20} color={COLORS.primary} />
-            <Text style={styles.sectionTitle}>오늘 스터디 일정</Text>
-          </View>
-          {todayStudySchedules.length === 0 ? (
-            <View style={styles.emptyCard}>
-              <Ionicons name="calendar-outline" size={32} color={COLORS.muted} />
-              <Text style={styles.emptyText}>오늘 스터디 일정이 없습니다</Text>
+        {/* ✅ 변경: 오늘 스터디 일정 섹션을 '있을 때만' 렌더링 */}
+        {todayStudySchedules.length > 0 && (
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Ionicons name="calendar" size={20} color={COLORS.primary} />
+              <Text style={styles.sectionTitle}>오늘 스터디 일정</Text>
             </View>
-          ) : (
-            todayStudySchedules.map((s) => (
+            {todayStudySchedules.map((s) => (
               <View key={s._id} style={styles.scheduleCard}>
                 <View style={styles.scheduleLeft}>
                   <View style={styles.scheduleIcon}>
@@ -394,9 +389,9 @@ export default function MainScreen() {
                   </View>
                 </View>
               </View>
-            ))
-          )}
-        </View>
+            ))}
+          </View>
+        )}
 
         {/* 스터디 그룹 목록 */}
         <View style={styles.section}>
